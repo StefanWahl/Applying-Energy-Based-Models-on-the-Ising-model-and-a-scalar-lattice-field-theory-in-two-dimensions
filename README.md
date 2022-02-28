@@ -1,3 +1,5 @@
+![Alt text](imagnetizationIsing.jpg)
+
 # Applying Energy Based-Models on the Ising model and a scalar lattice field theory in two dimensions
 
 This repository contains the code used in by Bachelor thesis 'Applying Energy Based-Models on the Ising model and a scalar lattice field theory in two dimensions'. It consists of three main parts:
