@@ -114,7 +114,7 @@ class DiscreteIsingModel2D_Metropolis():
             mask = (dE <= 0)
             
             #Get the acceptance ratios for the other states with positive Energy difference
-            indices = torch.arange(len(mu))[mask == False]
+            indices = torch.arange(len(mu))[mask.cpu() == False]
             
             if len(indices) > 0:
                 #Get the acceptance ratios:
