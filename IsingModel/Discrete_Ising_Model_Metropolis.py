@@ -5,6 +5,13 @@ import torch
 import json
 import argparse
 from utils import quick_eval_2D,get_tau_eq,plot_states,plotter_m_c_tau,get_T_c
+import random
+
+seed = 13
+
+torch.manual_seed(seed = seed)
+np.random.seed(seed)
+random.seed(seed)
 
 class DiscreteIsingModel2D_Metropolis():
     def __init__(self,device,N = None,T  = None,J = 1,k = 1,fs = 40):
@@ -227,7 +234,8 @@ if __name__ == "__main__":
     args = my_parser.parse_args()
 
     #Get the device
-    device = "cuda:0" if torch.cuda.is_available() else "cpu"
+    device = "cpu"#"cuda:0" if torch.cuda.is_available() else "cpu"
+    print(f"run simulation on '{device}'")
 
     #Get the Temperature values
     Temperatures_1 = np.arange(args.T_min,args.T_max,args.dT)
@@ -253,7 +261,7 @@ if __name__ == "__main__":
     n_iter = args.n_iter
     freq = args.freq
 
-    if record == True: path = f"Discrete_Ising_Model/N_{N}_Metropolis_Data_Set/"
+    if record == True: path = f"Discrete_Ising_Model/N_{N}_Metropolis_Data_Set_VALIDATION/"
     else: path = f"Discrete_Ising_Model/N_{N}_Metropolis/"
 
     #Run the simulation and record the magnetization and the energy
@@ -293,6 +301,7 @@ if __name__ == "__main__":
 
         if "t_eq" in info.keys():
             continue
+
         else:
             I = DiscreteIsingModel2D_Metropolis(N = N,T = T,device = device)
             get_tau_eq(path = p,fs = I.fs)
