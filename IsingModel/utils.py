@@ -325,6 +325,20 @@ def quick_eval_2D(path,magnetizations,energies,l,dt_max,fs):
             acorr_magnetization[i] = a
             tau_magnetization[i] = get_tau(acorr = a,dV = l)
 
+    if tau_magnetization <= 0: tau_magnetization = np.nan
+    if tau_energy <= 0: tau_energy = np.nan
+
+    #Handle invalid values
+    if not np.isfinite(tau_energy) and not np.isfinite(tau_magnetization):
+        tau_energy = 10000
+        tau_magnetization = 10000
+    
+    elif not np.isfinite(tau_energy) and np.isfinite(tau_magnetization):
+        tau_energy = tau_magnetization
+
+    elif np.isfinite(tau_energy) and not np.isfinite(tau_magnetization):
+        tau_magnetization = tau_energy
+
     #Plot the magnetization and the decay modeled by the correlation time
     plt.figure(figsize = (30,30))
 
