@@ -382,7 +382,8 @@ def quick_eval_2D(path,magnetizations,actions,l,dt_max,fs,n_reps):
     ####################################################################################################
     #Get Susceptibility
     ####################################################################################################
-    susceptibility_mean,sigma_susceptibility = bootstrap(x = magnetization_independent,s = get_susceptibility,args={"Omega":N**2})
+    #susceptibility_mean,sigma_susceptibility = bootstrap(x = magnetization_independent,s = get_susceptibility,args={"Omega":N**2})
+    susceptibility_mean,sigma_susceptibility = bootstrap(x = np.abs(magnetization_independent),s = get_susceptibility,args={"Omega":N**2})
 
     info["<chi^2>"] = susceptibility_mean
     info["sigma_chi^2"] = sigma_susceptibility
