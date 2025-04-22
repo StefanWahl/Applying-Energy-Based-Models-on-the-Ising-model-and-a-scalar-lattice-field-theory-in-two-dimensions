@@ -365,7 +365,7 @@ def quick_eval_2D(path,magnetizations,actions,l,dt_max,fs,n_reps):
     #Get samples that are three correlation times apert to ensure independance
     ####################################################################################################
 
-    step_size = int(info["tau_action"]) * 2
+    step_size = max(1,int(info["tau_action"]) * 2)
 
     magnetization_independent = M[::step_size]
     action_independent = S[::step_size]
